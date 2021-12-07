@@ -7,7 +7,7 @@ import seaborn as sns
 def load_file(file_name:str):
     """ Uploading a file for reading """
     filepath = f"./data/{file_name}"
-    data = pd.read_csv(filepath, index_col="Id")
+    data = pd.read_csv(filepath, index_col="Date", parse_dates=True)
     get_five(data)
     return data
 
@@ -24,15 +24,15 @@ def get_five(data) -> None:
 #print(sns.lineplot(data=fifa_data))
 #print(type(fifa_data))
 
-"""
 spotify_data = load_file("spotify.csv")
+sns.set_style("darkgrid")
 plt.figure(figsize=(14, 6))
 plt.title("Daily Global Streams of Popular Songs in 2017-2018")
 sns.lineplot(data=spotify_data['Shape of You'], label="Shape of fuck u")
 sns.lineplot(data=spotify_data['Despacito'], label='Despacito')
 plt.xlabel("Dateee")
 plt.show()
-"""
+
 
 """
 flight_data = load_file("flight_delays.csv")
@@ -55,7 +55,7 @@ sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'],
 plt.show()
 """
 
-
+"""
 #iris_data = load_file('iris.csv')
 iris_set_data = load_file("iris_setosa.csv")
 iris_ver_data = load_file("iris_versicolor.csv")
@@ -67,7 +67,7 @@ iris_vir_data = load_file("iris_virginica.csv")
 #sns.jointplot(x=iris_data['Petal Length (cm)'], 
 #              y=iris_data['Sepal Width (cm)'],
 #             kind='kde')
-
+"""
 
 """ COLOR_CODED PLOTS """
 
@@ -81,8 +81,10 @@ plt.show()
 """
 
 """ KDE PLOTS FOR EACH SPECIES """
+"""
 sns.kdeplot(data=iris_set_data["Petal Length (cm)"], label="Iris-setosa", shade=True)
 sns.kdeplot(data=iris_ver_data["Petal Length (cm)"], label="Iris-setosa", shade=True)
 sns.kdeplot(data=iris_vir_data["Petal Length (cm)"], label="Irits-setosa", shade=True)
 plt.title("Distribution of Petal Lengths, by Species")
 plt.show()
+"""
