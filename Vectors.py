@@ -1,3 +1,4 @@
+import math
 from typing import List
 
 
@@ -52,4 +53,21 @@ def vector_mean(vectors: List[Vector]) -> Vector:
     print(n)
     return scalar_multiply(1/n, vector_sum(vectors))
 
-print(vector_mean([[1, 2], [3, 4], [5, 6]]))
+def dot(v: Vector, w: Vector) -> float:
+    """ Вычисляет v_i * w_i + ... + v_n * w_n """
+    assert len(v) == len(w), "векторы должны иметь одинаковую длину"
+
+    return sum(v_i * w_i for v_i, w_i in zip(v, w))
+
+assert dot([1, 2, 3], [4, 5, 6]) == 32
+
+def sum_of_squares(v: Vector) -> float:
+    """ Возвращает v_i * v_i + ... + v_n * v_n """
+    return dot(v, v)
+
+assert sum_of_squares([1, 2, 3]) == 14
+
+def magnitude(v: Vector) -> float:
+    """ Возвращает магнитуду (или длину) вектора v """
+    # math.sqrt - это функция квадратного корня
+    return math.sqrt(sum_of_squares(v))
