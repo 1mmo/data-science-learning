@@ -71,3 +71,17 @@ def magnitude(v: Vector) -> float:
     """ Возвращает магнитуду (или длину) вектора v """
     # math.sqrt - это функция квадратного корня
     return math.sqrt(sum_of_squares(v))
+
+# Квадрат расстояния между двумя векторами
+def squared_distance(v: Vector, w: Vector) -> float:
+    """ Вычисляет (v_i - w_i) ** 2 + ... + (v_n - w_n) ** 2 """
+    return sum_of_squares(subtract(v, w))
+
+# Расстояние между двумя векторами
+def distance(v: Vector, w:Vector) -> float:
+    return math.sqrt(squared_distance(v, w))
+
+def distance_v2(v: Vector, w: Vector) -> float:
+    """ Вычисляет расстояние между v и w"""
+    return magnitude(subtract(v, w))
+
