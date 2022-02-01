@@ -53,4 +53,17 @@ def median(v: List[float]) -> float:
     """ Отыскивает 'ближайшнее к середине' значение v"""
     return _median_even(v) if len(v) % 2 == 0 else _median_odd(v)
 
+def quantile(xs: List[float], p: float) -> float:
+    """ Возвращает значение p-го процентиля в x """
+    p_index = int(p * len(xs))
+    return sorted(xs)[p_index]
 
+
+def mode(x: List[float]) -> float:
+    """ Возвращает список, т. к. может быть более одной моды """
+    counts = Counter(x)
+    max_count = max(counts.values())
+    return [x_i for x_i, count in counts.items()
+            if count == max_count]
+
+print(mode(num_friends))
