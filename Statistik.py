@@ -1,6 +1,8 @@
+import math
 import matplotlib.pyplot as plt
 from collections import Counter
 from typing import List
+from Vectors import sum_of_squares
 
 
 # Число друзей
@@ -17,7 +19,7 @@ plt.axis([0, 101, 0, 25])
 plt.title("Гистограмма количеств друзей")
 plt.xlabel('Число друзей')
 plt.ylabel('Число людей')
-plt.show()
+#plt.show()
 
 num_points = len(num_friends)
 largest_value = max(num_friends)
@@ -66,4 +68,33 @@ def mode(x: List[float]) -> float:
     return [x_i for x_i, count in counts.items()
             if count == max_count]
 
-print(mode(num_friends))
+def data_range(xs: List[float]) -> float:
+    return max(xs) - min(xs)
+
+assert data_range(num_friends) == 75
+
+def de_mean(xs: List[float]) -> List[float]:
+    """ Транслировать xs путем вычитания его среднего """
+    x_bar = mean(xs)
+    print(f'X_bar {x_bar}')
+    print([x - x_bar for x in xs])
+    return [x - x_bar for x in xs]
+
+def variance(xs: List[float]) -> float:
+    """ Почти среднеквадратическое отклонение от среднего """
+    assert len(xs) >= 2, 'дисперсия требует наличия не менее двух элементов'
+
+    n = len(xs)
+    deviations = de_mean(xs)
+    return sum_of_squares(deviations) / (n - 1)
+
+
+def standard_deviation(xs: List[float]) -> float:
+    """ Стандартное отклонение - это корень квадратный из дисперсии """
+    return math.sqrt(variance(xs))
+
+def interquartile_range(xs: List[float]) -> float:
+    """ Возвращает разницу между 75%-ным и 25%-ным квартилями """
+    return quantile(xs, 0.75) - quantile(xs, 0.25)
+
+print(interquartile_range(num_friends))
