@@ -2,17 +2,16 @@ import math
 import matplotlib.pyplot as plt
 from collections import Counter
 from typing import List
-from Vectors import sum_of_squares
+from Vectors import sum_of_squares, dot
 
 
 # Число друзей
 num_friends = [100, 49, 41, 40, 25]
+daily_hours = [5, 2, 3, 6, 7]
 
 friend_counts = Counter(num_friends)
-print(friend_counts)
 xs = range(101)
 ys = [friend_counts[x] for x in xs]
-print(ys)
 
 plt.bar(xs, ys)
 plt.axis([0, 101, 0, 25])
@@ -33,9 +32,6 @@ second_largest_value = sorted_values[-2]
 # Среднее значение
 def mean(xs: List[float]) -> float:
     return sum(xs) / len(xs)
-
-print(mean(num_friends))
-
 
 def _median_odd(xs: List[float]) -> float:
     """ Если len(xs) является нечетной,
@@ -76,8 +72,6 @@ assert data_range(num_friends) == 75
 def de_mean(xs: List[float]) -> List[float]:
     """ Транслировать xs путем вычитания его среднего """
     x_bar = mean(xs)
-    print(f'X_bar {x_bar}')
-    print([x - x_bar for x in xs])
     return [x - x_bar for x in xs]
 
 def variance(xs: List[float]) -> float:
@@ -97,4 +91,10 @@ def interquartile_range(xs: List[float]) -> float:
     """ Возвращает разницу между 75%-ным и 25%-ным квартилями """
     return quantile(xs, 0.75) - quantile(xs, 0.25)
 
-print(interquartile_range(num_friends))
+def covariance(xs: List[float], ys: List[float]) -> float:
+    assert len(xs) == len(ys), "xs и ys должны иметь одинаковое число элементов"
+    return dot(de_mean(xs), de_mean(ys)) / (len(xs) - 1)
+
+print(covariance(num_friends, daily_hours))
+
+
