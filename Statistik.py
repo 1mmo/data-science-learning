@@ -7,7 +7,7 @@ from Vectors import sum_of_squares, dot
 
 # Число друзей
 num_friends = [100, 49, 41, 40, 25]
-daily_hours = [5, 2, 3, 6, 7]
+daily_hours = [5, 4, 3, 2, 1]
 
 friend_counts = Counter(num_friends)
 xs = range(101)
@@ -95,6 +95,15 @@ def covariance(xs: List[float], ys: List[float]) -> float:
     assert len(xs) == len(ys), "xs и ys должны иметь одинаковое число элементов"
     return dot(de_mean(xs), de_mean(ys)) / (len(xs) - 1)
 
-print(covariance(num_friends, daily_hours))
+def correlation(xs: List[float], ys: List[float]) -> float:
+    """ Измеряет степень, с которой xs и ys варьируются 
+        в тандеме вокруг своих средний """
+    stdev_x = standard_deviation(xs)
+    stdev_y = standard_deviation(ys)
+    if stdev_x > 0 and stdev_y > 0:
+        return covariance(xs, ys) / stdev_x / stdev_y
+    else:
+        return 0 # если вариации нет, то корреляция равна
 
+print(correlation(num_friends, daily_hours))
 
