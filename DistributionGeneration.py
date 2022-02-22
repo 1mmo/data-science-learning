@@ -35,7 +35,7 @@ def ex_1_19():
     plt.ylabel('Частота')
     plt.show()
 
-dishonest_baker(950, 30)
+#ex_1_19()
 
 def get_skew():
     s = dishonest_baker(950, 30)
@@ -43,4 +43,21 @@ def get_skew():
             'median': s.median(),
             'asymmetry': s.skew() }
 
-print(get_skew())
+def qqplot(xs):
+    """ Квантильный график (график квантиль-квантиль, Q-Q plot) """
+    d = {0:sorted(stats.norm.rvs(loc=0, scale=1, size=len(xs))),
+         1:sorted(xs)}
+    pd.DataFrame(d).plot.scatter(0, 1, s=5, grid=True)
+    plt.xlabel('Квантили теоретического нормального распределения')
+    plt.ylabel('Квантили данных')
+    plt.title('Квантильный график', fontweight='semibold')
+
+def ex_1_21():
+    '''Показать квантильные графики 
+       для честного и нечестного булочников'''
+    qqplot( honest_baker(1000, 30) )
+    plt.show()
+    qqplot( dishonest_baker(950, 30) )
+    plt.show()
+
+ex_1_21()
