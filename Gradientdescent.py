@@ -1,5 +1,6 @@
 import random
-from Vectors import distance, add, scalar_multiply, Vector
+from Vectors import (distance, add, 
+                     scalar_multiply, Vector)
 
 """
 Проверка фукнции sum_of_squares: v_i * v_i + ... + v_n * v_n
@@ -31,7 +32,6 @@ for epoch in range(1000):
                                       # градиентный шаг
 
     #print(epoch, v)
-
 
 
 
